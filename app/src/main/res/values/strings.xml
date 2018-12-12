@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RoomEditText</string>
+    <string name="addFieldButton">Add Field To Room</string>
+</resources>
