@@ -24,6 +24,7 @@ class RoomEditText : AppCompatActivity() {
             "fields"
         ).allowMainThreadQueries().build()
 
+        db.fieldDao().startFields()
 
         addButton.setOnClickListener {
 
@@ -32,11 +33,12 @@ class RoomEditText : AppCompatActivity() {
                 val inputField = Field(fieldEditText.text.toString())
                 db.fieldDao().insertField(inputField)
                 Log.d("blablabla", "----------------- Add Field To Room -----------------")
+                fieldEditText.text.clear()
             }
         }
 
         delAllButton.setOnClickListener {
-            db.fieldDao().deleteAll()
+            db.fieldDao().deleteAllFields()
             Log.d("blablabla", "-----------------Deleted All Field To Room -----------------")
         }
 

@@ -18,9 +18,18 @@ abstract class FieldDao {
 
     fun insertField(_field: Field) {
         insert(_field)
-        fieldEmitter.emit( fieldsFromRoom() )
+        fieldEmitter.emit(fieldsFromRoom())
     }
 
     @Query("DELETE FROM fields")
     abstract fun deleteAll()
+
+    fun deleteAllFields() {
+        deleteAll()
+        fieldEmitter.emit(fieldsFromRoom())
+    }
+
+    fun startFields() {
+        fieldEmitter.emit(fieldsFromRoom())
+    }
 }
