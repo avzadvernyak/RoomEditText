@@ -4,17 +4,23 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import kampukter.roomedittext.ui.fieldEmitter
 
 
 @Dao
-interface FieldDao {
+abstract class FieldDao {
 
-    @Query("select field from fields")
-    fun fieldsFromRoom(): List<String>
+    @Query("select * from fields")
+    abstract fun fieldsFromRoom(): List<Field>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(field: Field)
+    abstract fun insert(field: Field)
+
+    fun insertField(_field: Field) {
+        insert(_field)
+        fieldEmitter.emit( fieldsFromRoom() )
+    }
 
     @Query("DELETE FROM fields")
-    fun deleteAll()
+    abstract fun deleteAll()
 }
